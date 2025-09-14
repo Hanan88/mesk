@@ -1,0 +1,63 @@
+---
+import ar from "../locales/ar.json";
+import en from "../locales/en.json";
+
+import "../styles/global.css";
+
+const { title, lang = "ar" } = Astro.props;
+const url = Astro.url;
+const t = lang === "en" ? en : ar;
+const { fullWidth = false } = Astro.props;
+
+---
+
+<html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"} class="bg-gray-50 text-gray-900">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{Astro.props.title || t.siteName}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body class="font-[Cairo]">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+        <!-- Logo -->
+        <h2 class="text-2xl font-bold">{t.siteName}</h2>
+
+        <!-- Navigation -->
+        <nav class="flex gap-4">
+          <a href={`/${lang}`} class="hover:text-blue-300 font-semibold">{t.menu.home}</a>
+          <a href={`/${lang}/about`} class="hover:text-blue-300 font-semibold">{t.menu.about}</a>
+          <a href={`/${lang}/products`} class="hover:text-blue-300 font-semibold">{t.menu.products}</a>
+          <a href={`/${lang}/gallery`} class="hover:text-blue-300 font-semibold">{t.menu.gallery}</a>
+          <a href={`/${lang}/contact`} class="hover:text-blue-300 font-semibold">{t.menu.contact}</a>
+        </nav>
+
+        <!-- Language Switch -->
+        <div>
+          {lang === "ar" ? (
+            <a href={url.pathname.replace('/ar', '/en')} class="bg-white text-blue-900 px-3 py-1 rounded">
+              EN
+            </a>
+          ) : (
+            <a href={url.pathname.replace('/en', '/ar')} class="bg-white text-blue-900 px-3 py-1 rounded">
+              ع
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class={`${fullWidth ? "w-full p-0" : "max-w-6xl mx-auto py-8 px-4"}`}>
+      <slot /> 
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4 mt-12">
+      {t.footer.rights}
+    </footer>
+  </body>
+</html>

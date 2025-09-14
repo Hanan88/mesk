@@ -1,0 +1,120 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ar from "../../locales/ar.json";
+import en from "../../locales/en.json";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "ar" } },
+    { params: { lang: "en" } }
+  ];
+}
+
+const { lang = "ar" } = Astro.params;
+const t = lang === "en" ? en : ar;
+
+const pools = [
+  "/gallery/pool-01.jpeg",
+  "/gallery/pool-02.jpeg",
+  "/gallery/pool-03.jpeg",
+  "/gallery/pool-04.jpeg",
+  "/gallery/pool-05.jpeg",
+  "/gallery/pool-06.jpeg",
+  "/gallery/pool-07.jpeg",
+  "/gallery/pool-08.jpeg",
+];
+
+const fountains = [
+  "/gallery/fountain-01.jpeg",
+  "/gallery/fountain-02.jpeg",
+  "/gallery/fountain-03.jpeg",
+  "/gallery/fountain-04.jpeg",
+];
+---
+
+<Layout title={`${t.menu.gallery} | ${t.siteName}`} lang={lang}>
+  <section class="py-16 container mx-auto px-6">
+    <h1 class="text-4xl font-bold text-blue-900 mb-6 text-center">{t.gallery.title}</h1>
+    <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center mb-12">
+      {t.gallery.subtitle}
+    </p>
+
+    <!-- Pools Section -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">{t.gallery.pools}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {pools.map((src, index) => (
+          <div class="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer" data-lightbox={src}>
+            <img 
+              src={src} 
+              alt={`صورة معرض ${index + 1}`} 
+              class="w-full h-48 object-cover transform group-hover:scale-110 transition duration-500" 
+            />
+            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-500">
+              <span class="text-white text-lg font-semibold">{t.gallery.zoom}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Fountains Section -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">{t.gallery.fountains}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {fountains.map((src, index) => (
+          <div class="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer" data-lightbox={src}>
+            <img 
+              src={src} 
+              alt={`صورة معرض ${index + 1}`} 
+              class="w-full h-48 object-cover transform group-hover:scale-110 transition duration-500" 
+            />
+            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-500">
+              <span class="text-white text-lg font-semibold">{t.gallery.zoom}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+    <span id="closeLightbox" class="absolute top-6 right-6 text-white text-3xl cursor-pointer">&times;</span>
+    <img id="lightboxImg" src="" alt="عرض الصورة" class="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg" />
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("closeLightbox");
+
+    document.querySelectorAll("[data-lightbox]").forEach(item => {
+      item.addEventListener("click", () => {
+        const src = item.getAttribute("data-lightbox");
+        if (lightbox && lightboxImg) {
+          // Ensure lightboxImg is treated as an HTMLImageElement to access 'src'
+          // and provide a fallback for src in case data-lightbox is null
+          (lightboxImg as HTMLImageElement).src = src || '';
+          lightbox.classList.remove("hidden");
+        }
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        if (lightbox) {
+          lightbox.classList.add("hidden");
+        }
+      });
+    }
+
+    if (lightbox) {
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.add("hidden");
+        }
+      });
+    }
+  </script>
+</Layout>

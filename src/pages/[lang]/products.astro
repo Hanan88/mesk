@@ -1,0 +1,126 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ar from "../../locales/ar.json";
+import en from "../../locales/en.json";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "ar" } },
+    { params: { lang: "en" } }
+  ];
+}
+
+const { lang = "ar" } = Astro.params;
+const t = lang === "en" ? en : ar;
+---
+
+<Layout title={`${t.menu.products} | ${t.siteName}`} lang={lang}>
+  <section class="py-16 container mx-auto px-6">
+    <h1 class="text-4xl font-bold text-blue-900 mb-6 text-center">{t.products.title}</h1>
+    <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center mb-12">
+      {t.products.subtitle}
+    </p>
+
+    <!-- Products Grid -->
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- فلتر -->
+      <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg transition hover:scale-105 duration-300">
+        <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+          <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-blue-900">{t.products.filters}</h3>
+        <p class="text-gray-600 mb-4">
+          {t.products.filtersDesc}
+        </p>
+        <a href={`/${lang}/contact`} class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">{t.products.orderNow}</a>
+      </div>
+
+      <!-- مضخات -->
+      <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg transition hover:scale-105 duration-300">
+        <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+          <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-blue-900">{t.products.pumps}</h3>
+        <p class="text-gray-600 mb-4">
+          {t.products.pumpsDesc}
+        </p>
+        <a href={`/${lang}/contact`} class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">{t.products.orderNow}</a>
+      </div>
+
+      <!-- سخانات -->
+      <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg transition hover:scale-105 duration-300">
+        <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+          <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-blue-900">{t.products.heaters}</h3>
+        <p class="text-gray-600 mb-4">
+          {t.products.heatersDesc}
+        </p>
+        <a href={`/${lang}/contact`} class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">{t.products.orderNow}</a>
+      </div>
+
+      <!-- معدات -->
+      <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg transition hover:scale-105 duration-300">
+        <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+          <svg class="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-blue-900">{t.products.equipment}</h3>
+        <p class="text-gray-600 mb-4">
+          {t.products.equipmentDesc}
+        </p>
+        <a href={`/${lang}/contact`} class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">{t.products.orderNow}</a>
+      </div>
+
+      <!-- لايتات -->
+      <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg transition hover:scale-105 duration-300">
+        <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+          <svg class="w-12 h-12 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-blue-900">{t.products.lights}</h3>
+        <p class="text-gray-600 mb-4">
+          {t.products.lightsDesc}
+        </p>
+        <a href={`/${lang}/contact`} class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">{t.products.orderNow}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-blue-900 mb-10">{t.products.services}</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 shadow rounded-lg hover:shadow-lg">
+          <h3 class="text-xl font-bold mb-2">{t.products.design}</h3>
+          <p class="text-gray-600">
+            {t.products.designText}
+          </p>
+        </div>
+        <div class="bg-white p-6 shadow rounded-lg hover:shadow-lg">
+          <h3 class="text-xl font-bold mb-2">{t.products.maintenance}</h3>
+          <p class="text-gray-600">
+            {t.products.maintenanceText}
+          </p>
+        </div>
+        <div class="bg-white p-6 shadow rounded-lg hover:shadow-lg">
+          <h3 class="text-xl font-bold mb-2">{t.products.supply}</h3>
+          <p class="text-gray-600">
+            {t.products.supplyText}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

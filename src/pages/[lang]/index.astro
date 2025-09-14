@@ -1,0 +1,510 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ar from "../../locales/ar.json";
+import en from "../../locales/en.json";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: "ar" } },
+    { params: { lang: "en" } }
+  ];
+}
+
+const { lang = "ar" } = Astro.params;
+const t = lang === "en" ? en : ar;
+---
+
+<Layout title={`${t.menu.home} | ${t.siteName}`} lang={lang} fullWidth={true}>
+  <!-- Hero -->
+  <section class="relative w-full h-screen overflow-hidden">
+            <!-- Background Image -->
+            <div
+              class="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
+              style="background-image: url('/gallery/pool-05.jpeg');"
+            ></div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+      <h1 class="text-5xl font-bold mb-4 animate-fade-in-up">Mesk Swimming Pools</h1>
+      <p class="text-xl mb-6 animate-fade-in-up animation-delay-200">Complete swimming pool solutions – design, equipment, and services</p>
+      <a
+        href="/en/contact"
+        class="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold shadow hover:bg-gray-200 hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-400"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Statistics -->
+  <section class="py-16 bg-blue-900 text-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-10 animate-fade-in-up">{t.home.statsTitle}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="animate-counter-up hover:scale-105 transition-transform duration-300">
+          <div class="text-4xl font-bold mb-2 counter" data-target="500">0</div>
+          <div class="text-lg opacity-90">{t.home.completedProjects}</div>
+        </div>
+        <div class="animate-counter-up hover:scale-105 transition-transform duration-300 animation-delay-200">
+          <div class="text-4xl font-bold mb-2 counter" data-target="15">0</div>
+          <div class="text-lg opacity-90">{t.home.yearsExperience}</div>
+        </div>
+        <div class="animate-counter-up hover:scale-105 transition-transform duration-300 animation-delay-400">
+          <div class="text-4xl font-bold mb-2">24/7</div>
+          <div class="text-lg opacity-90">{t.home.technicalSupport}</div>
+        </div>
+        <div class="animate-counter-up hover:scale-105 transition-transform duration-300 animation-delay-600">
+          <div class="text-4xl font-bold mb-2 counter" data-target="100">0</div>
+          <div class="text-lg opacity-90">{t.home.customerSatisfaction}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section class="py-16 bg-gray-50 text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-4 animate-fade-in-up">{t.home.aboutTitle}</h2>
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
+        {t.home.aboutText}
+      </p>
+      <a href={`/${lang}/about`} class="inline-block mt-6 bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-400">
+        {t.home.readMore}
+      </a>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-6 animate-fade-in-up">{t.home.whyUsTitle}</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white shadow p-6 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-left">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.whyQuality}</h3>
+          <p class="text-gray-600">{t.home.whyQualityDesc}</p>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up animation-delay-200">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.whyExperience}</h3>
+          <p class="text-gray-600">{t.home.whyExperienceDesc}</p>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-400">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.whySupport}</h3>
+          <p class="text-gray-600">{t.home.whySupportDesc}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Products Preview -->
+  <section class="py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-10 animate-fade-in-up">{t.home.productsTitle}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up">
+          <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.filters}</h3>
+          <p class="text-gray-600 mb-4">{t.home.filtersDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home.sandFilters}</p>
+            <p>• {t.home.cartridgeFilters}</p>
+            <p>• {t.home.deFilters}</p>
+          </div>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up animation-delay-200">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.pumps}</h3>
+          <p class="text-gray-600 mb-4">{t.home.pumpsDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home.variableSpeedPumps}</p>
+            <p>• {t.home.energyEfficientPumps}</p>
+            <p>• {t.home.submersiblePumps}</p>
+          </div>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up animation-delay-400">
+          <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.heaters}</h3>
+          <p class="text-gray-600 mb-4">{t.home.heatersDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home.gasHeaters}</p>
+            <p>• {t.home.electricHeaters}</p>
+            <p>• {t.home.heatPumps}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional Products Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-600">
+          <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.maintenanceEquipment}</h3>
+          <p class="text-gray-600 mb-4">{t.home.maintenanceEquipmentDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home.cleaningNets}</p>
+            <p>• {t.home.cleaningBrushes}</p>
+            <p>• {t.home.measuringTools}</p>
+          </div>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up animation-delay-800">
+          <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.lightingSystems}</h3>
+          <p class="text-gray-600 mb-4">{t.home.lightingSystemsDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home.ledLights}</p>
+            <p>• {t.home.colorChangingLights}</p>
+            <p>• {t.home.exteriorLights}</p>
+          </div>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-1000">
+          <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-xl mb-2">{t.home.poolDesignService}</h3>
+          <p class="text-gray-600 mb-4">{t.home.poolDesignServiceDesc}</p>
+          <div class="text-sm text-gray-500">
+            <p>• {t.home["3dDesign"]}</p>
+            <p>• {t.home.curvedPools}</p>
+            <p>• {t.home.sportsPools}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href={`/${lang}/products`} class="bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-1200">
+          {t.home.seeMore}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-10 animate-fade-in-up">{t.home.servicesTitle}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="text-center p-6 border border-gray-200 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-left">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">{t.home.poolDesign}</h3>
+          <p class="text-gray-600">{t.home.poolDesignDesc}</p>
+        </div>
+        <div class="text-center p-6 border border-gray-200 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-up animation-delay-200">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">{t.home.regularMaintenance}</h3>
+          <p class="text-gray-600">{t.home.regularMaintenanceDesc}</p>
+        </div>
+        <div class="text-center p-6 border border-gray-200 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-400">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:rotate-12 transition-transform duration-300">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">{t.home.equipmentSupply}</h3>
+          <p class="text-gray-600">{t.home.equipmentSupplyDesc}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Preview -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-10 animate-fade-in-up">{t.home.galleryTitle}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="animate-zoom-in">
+          <img src="/gallery/pool-01.jpeg" alt="مسبح" class="rounded-lg shadow h-84 w-full hover:scale-110 transition-transform duration-300" />
+        </div>
+        <div class="animate-zoom-in animation-delay-200">
+          <img src="/gallery/pool-02.jpeg" alt="مسبح" class="rounded-lg shadow h-84 w-full hover:scale-110 transition-transform duration-300" />
+        </div>
+        <div class="animate-zoom-in animation-delay-400">
+          <img src="/gallery/pool-03.jpeg" alt="مسبح" class="rounded-lg shadow h-84 w-full hover:scale-110 transition-transform duration-300" />
+        </div>
+        <div class="animate-zoom-in animation-delay-600">
+          <img src="/gallery/pool-04.jpeg" alt="مسبح" class="rounded-lg shadow h-84 w-full hover:scale-110 transition-transform duration-300" />
+        </div>
+      </div>
+      <a href={`/${lang}/gallery`} class="inline-block mt-8 bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-800">
+        {t.home.seeMore}
+      </a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-10 animate-fade-in-up">{t.home.testimonialsTitle}</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white shadow p-6 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-left">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+            </div>
+          </div>
+          <p class="text-gray-700 italic mb-4">"{t.home.testimonial1}"</p>
+          <h3 class="font-semibold text-blue-900">— {t.home.client1}</h3>
+        </div>
+        <div class="bg-white shadow p-6 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-200">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+            </div>
+          </div>
+          <p class="text-gray-700 italic mb-4">"{t.home.testimonial2}"</p>
+          <h3 class="font-semibold text-blue-900">— {t.home.client2}</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-10 animate-fade-in-up">{t.home.faqTitle}</h2>
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-4">
+          <div class="bg-white rounded-lg shadow hover:shadow-lg transition-all duration-300 animate-slide-in-up">
+            <button class="w-full px-6 py-4 text-right flex justify-between items-center hover:bg-gray-50 rounded-lg hover:scale-105 transition-all duration-300">
+              <span class="font-semibold">{t.home.faq1}</span>
+              <svg class="w-5 h-5 text-gray-500 hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-6 pb-4 text-gray-600">
+              <p>{t.home.faq1Answer}</p>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow hover:shadow-lg transition-all duration-300 animate-slide-in-up animation-delay-200">
+            <button class="w-full px-6 py-4 text-right flex justify-between items-center hover:bg-gray-50 rounded-lg hover:scale-105 transition-all duration-300">
+              <span class="font-semibold">{t.home.faq2}</span>
+              <svg class="w-5 h-5 text-gray-500 hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-6 pb-4 text-gray-600">
+              <p>{t.home.faq2Answer}</p>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow hover:shadow-lg transition-all duration-300 animate-slide-in-up animation-delay-400">
+            <button class="w-full px-6 py-4 text-right flex justify-between items-center hover:bg-gray-50 rounded-lg hover:scale-105 transition-all duration-300">
+              <span class="font-semibold">{t.home.faq3}</span>
+              <svg class="w-5 h-5 text-gray-500 hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="px-6 pb-4 text-gray-600">
+              <p>{t.home.faq3Answer}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact CTA -->
+  <section class="py-16 bg-blue-900 text-white text-center">
+    <h2 class="text-3xl font-bold mb-4 animate-fade-in-up">{t.home.contactTitle}</h2>
+    <p class="text-lg mb-6 animate-fade-in-up animation-delay-200">{t.home.contactText}</p>
+    <a href={`/${lang}/contact`} class="bg-white text-blue-900 px-6 py-3 rounded-full font-semibold shadow hover:bg-gray-200 hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-400">
+      {t.home.contactNow}
+    </a>
+  </section>
+</Layout>
+
+<script>
+  // Counter Animation
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    
+    counters.forEach(counter => {
+      const targetAttr = counter.getAttribute('data-target');
+      if (!targetAttr) return;
+      
+      const target = parseInt(targetAttr);
+      const duration = 2000; // 2 seconds
+      const increment = target / (duration / 16); // 60fps
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        counter.textContent = Math.floor(current) + (target === 100 ? '%' : '+');
+      }, 16);
+    });
+  }
+
+  // Intersection Observer for scroll animations
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          
+          // Trigger counter animation when stats section is visible
+          if (entry.target.classList.contains('animate-counter-up')) {
+            animateCounters();
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.animate-fade-in-up, .animate-slide-in-left, .animate-slide-in-right, .animate-slide-in-up, .animate-zoom-in, .animate-counter-up').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // FAQ Accordion functionality
+  function initFAQ() {
+    const faqItems = document.querySelectorAll('.bg-white.rounded-lg.shadow');
+    
+    faqItems.forEach(item => {
+      const button = item.querySelector('button');
+      const content = item.querySelector('.px-6.pb-4') as HTMLElement;
+      const icon = button?.querySelector('svg') as SVGElement;
+      
+      if (!button || !content || !icon) return;
+      
+      // Initially hide all content
+      content.style.display = 'none';
+      
+      button.addEventListener('click', () => {
+        const isOpen = content.style.display !== 'none';
+        
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            const otherContent = otherItem.querySelector('.px-6.pb-4') as HTMLElement;
+            const otherIcon = otherItem.querySelector('button svg') as SVGElement;
+            if (otherContent && otherIcon) {
+              otherContent.style.display = 'none';
+              otherIcon.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+        
+        // Toggle current item
+        if (isOpen) {
+          content.style.display = 'none';
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          content.style.display = 'block';
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  }
+
+  // Initialize everything when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+    initFAQ();
+  });
+
+  // Add smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      if (!href) return;
+      
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
