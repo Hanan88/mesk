@@ -8,7 +8,9 @@
       "contact": "Contact"
     },
     "footer": {
-      "rights": "All rights reserved © 2025 Mesk"
+      "rights": "All rights reserved © 2025 Mesk",
+      "followUs": "Follow us on",
+      "socialMedia": "Social Media"
     },
     "home": {
       "title": "Mesk Swimming Pools",
@@ -128,6 +130,13 @@
       "phone": "Phone",
       "whatsapp": "WhatsApp",
       "email": "Email",
+      "workingHours": "Working Hours",
+      "workingHoursDesc": "We are available to serve you at the following times:",
+      "weekdays": "Sunday - Thursday: 8:00 AM - 6:00 PM",
+      "saturday": "Saturday: 9:00 AM - 4:00 PM",
+      "friday": "Friday: Closed",
+      "socialMedia": "Social Media",
+      "followUs": "Follow us on",
       "sendMessage": "Send us a message",
       "name": "Name",
       "message": "Message",
