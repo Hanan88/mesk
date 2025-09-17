@@ -177,3 +177,79 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Mobile Menu Styles */
+#mobileMenu {
+  z-index: 9999;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#mobileMenu::-webkit-scrollbar {
+  width: 4px;
+}
+
+#mobileMenu::-webkit-scrollbar-track {
+  background: #1e40af;
+}
+
+#mobileMenu::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+#mobileMenu::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Mobile Menu Button Animation */
+#mobileMenuBtn {
+  transition: all 0.3s ease;
+}
+
+#mobileMenuBtn:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Menu Close Button */
+#mobileMenuClose {
+  transition: all 0.3s ease;
+}
+
+#mobileMenuClose:hover {
+  transform: scale(1.1);
+  background-color: #1e40af;
+}
+
+/* Mobile Navigation Links */
+.mobile-nav-link {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.mobile-nav-link:hover {
+  transform: translateX(5px);
+}
+
+.mobile-nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #60a5fa;
+  transition: width 0.3s ease;
+}
+
+.mobile-nav-link:hover::before {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  #mobileMenu {
+    max-height: 70vh;
+  }
+}

@@ -26,8 +26,8 @@ const { fullWidth = false } = Astro.props;
         <!-- Logo -->
         <h2 class="text-2xl font-bold">{t.siteName}</h2>
 
-        <!-- Navigation -->
-        <nav class="flex gap-4">
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex gap-4">
           <a href={`/${lang}`} class="hover:text-blue-300 font-semibold">{t.menu.home}</a>
           <a href={`/${lang}/about`} class="hover:text-blue-300 font-semibold">{t.menu.about}</a>
           <a href={`/${lang}/products`} class="hover:text-blue-300 font-semibold">{t.menu.products}</a>
@@ -35,8 +35,8 @@ const { fullWidth = false } = Astro.props;
           <a href={`/${lang}/contact`} class="hover:text-blue-300 font-semibold">{t.menu.contact}</a>
         </nav>
 
-        <!-- Search and Language Switch -->
-        <div class="flex items-center gap-4">
+        <!-- Desktop Search and Language Switch -->
+        <div class="hidden lg:flex items-center gap-4">
           <!-- Search Dropdown -->
           <div class="relative">
             <input 
@@ -73,6 +73,74 @@ const { fullWidth = false } = Astro.props;
               ع
             </a>
           )}
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="lg:hidden p-2 hover:bg-blue-800 rounded-lg transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div id="mobileMenu" class="lg:hidden bg-blue-800 border-t border-blue-700 absolute top-full left-0 right-0 transform -translate-y-full opacity-0 transition-all duration-300 ease-in-out pointer-events-none shadow-lg">
+        <div class="px-6 py-4 space-y-4">
+          <!-- Close Button -->
+          <div class="flex justify-end mb-2">
+            <button id="mobileMenuClose" class="p-2 hover:bg-blue-700 rounded-lg transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <!-- Mobile Search -->
+          <div class="relative mb-4">
+            <input 
+              type="text" 
+              id="mobileSearchInput"
+              placeholder={lang === "ar" ? "البحث..." : "Search..."}
+              class="w-full px-4 py-2 pr-10 rounded-lg text-gray-900 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+              autocomplete="off"
+            />
+            <button 
+              id="mobileSearchBtn"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+            
+            <!-- Mobile Search Results -->
+            <div id="mobileSearchResults" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden z-50 max-h-96 overflow-y-auto">
+              <div id="mobileSearchResultsContent" class="p-2">
+                <!-- Results will be populated here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Navigation Links -->
+          <nav class="space-y-2">
+            <a href={`/${lang}`} class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors font-semibold mobile-nav-link">{t.menu.home}</a>
+            <a href={`/${lang}/about`} class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors font-semibold mobile-nav-link">{t.menu.about}</a>
+            <a href={`/${lang}/products`} class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors font-semibold mobile-nav-link">{t.menu.products}</a>
+            <a href={`/${lang}/gallery`} class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors font-semibold mobile-nav-link">{t.menu.gallery}</a>
+            <a href={`/${lang}/contact`} class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors font-semibold mobile-nav-link">{t.menu.contact}</a>
+          </nav>
+
+          <!-- Mobile Language Switch -->
+          <div class="pt-4 border-t border-blue-700">
+            {lang === "ar" ? (
+              <a href={url.pathname.replace('/ar', '/en')} class="inline-block bg-white text-blue-900 px-4 py-2 rounded hover:bg-gray-100 transition-colors font-semibold">
+                EN
+              </a>
+            ) : (
+              <a href={url.pathname.replace('/en', '/ar')} class="inline-block bg-white text-blue-900 px-4 py-2 rounded hover:bg-gray-100 transition-colors font-semibold">
+                ع
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </header>
@@ -125,6 +193,67 @@ const { fullWidth = false } = Astro.props;
         const searchResults = document.getElementById('searchResults');
         const searchResultsContent = document.getElementById('searchResultsContent');
         
+        // Mobile elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileSearchInput = document.getElementById('mobileSearchInput') as HTMLInputElement;
+        const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+        const mobileSearchResults = document.getElementById('mobileSearchResults');
+        const mobileSearchResultsContent = document.getElementById('mobileSearchResultsContent');
+        
+        // Function to close mobile menu
+        function closeMobileMenu() {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+          }
+        }
+
+        // Function to open mobile menu
+        function openMobileMenu() {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+            mobileMenu.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+          }
+        }
+
+        // Mobile Menu Toggle
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('translate-y-0');
+            if (isOpen) {
+              closeMobileMenu();
+            } else {
+              openMobileMenu();
+            }
+          });
+        }
+
+        // Mobile Menu Close Button
+        if (mobileMenuClose && mobileMenu) {
+          mobileMenuClose.addEventListener('click', function() {
+            closeMobileMenu();
+          });
+        }
+
+        // Close mobile menu when clicking on navigation links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            closeMobileMenu();
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+          const target = e.target as Node;
+          if (mobileMenu && mobileMenuBtn && 
+              !mobileMenu.contains(target) && 
+              !mobileMenuBtn.contains(target)) {
+            closeMobileMenu();
+          }
+        });
+
         if (!searchInput || !searchBtn || !searchResults || !searchResultsContent) return;
         
         // Define searchable content
@@ -207,9 +336,12 @@ const { fullWidth = false } = Astro.props;
         ];
         
         // Search function
-        function performSearch(query: string) {
-          if (!query || !searchResults) {
-            searchResults?.classList.add('hidden');
+        function performSearch(query: string, isMobile = false) {
+          const targetResults = isMobile ? mobileSearchResults : searchResults;
+          const targetResultsContent = isMobile ? mobileSearchResultsContent : searchResultsContent;
+          
+          if (!query || !targetResults) {
+            targetResults?.classList.add('hidden');
             return;
           }
           
@@ -236,15 +368,18 @@ const { fullWidth = false } = Astro.props;
             });
           });
           
-          displayResults(results, query);
+          displayResults(results, query, isMobile);
         }
         
         // Display results
-        function displayResults(results: any[], query: string) {
-          if (!searchResultsContent) return;
+        function displayResults(results: any[], query: string, isMobile = false) {
+          const targetResults = isMobile ? mobileSearchResults : searchResults;
+          const targetResultsContent = isMobile ? mobileSearchResultsContent : searchResultsContent;
+          
+          if (!targetResultsContent) return;
           
           if (results.length === 0) {
-            searchResultsContent.innerHTML = `
+            targetResultsContent.innerHTML = `
               <div class="p-4 text-center text-gray-500">
                 <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -253,7 +388,7 @@ const { fullWidth = false } = Astro.props;
               </div>
             `;
           } else {
-            searchResultsContent.innerHTML = results.map((result: any) => `
+            targetResultsContent.innerHTML = results.map((result: any) => `
               <div class="p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
                 <div class="flex items-start justify-between mb-1">
                   <h4 class="font-semibold text-blue-900 text-sm">
@@ -279,7 +414,7 @@ const { fullWidth = false } = Astro.props;
             `).join('');
           }
           
-          searchResults?.classList.remove('hidden');
+          targetResults?.classList.remove('hidden');
         }
         
         // Highlight matching text
@@ -290,11 +425,11 @@ const { fullWidth = false } = Astro.props;
           );
         }
         
-        // Event listeners
+        // Event listeners for desktop search
         searchInput.addEventListener('input', function() {
           const query = this.value.trim();
           if (query.length > 1) {
-            performSearch(query);
+            performSearch(query, false);
           } else {
             searchResults.classList.add('hidden');
           }
@@ -315,12 +450,43 @@ const { fullWidth = false } = Astro.props;
             }
           }
         });
+
+        // Event listeners for mobile search
+        if (mobileSearchInput) {
+          mobileSearchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            if (query.length > 1) {
+              performSearch(query, true);
+            } else {
+              mobileSearchResults?.classList.add('hidden');
+            }
+          });
+          
+          mobileSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              const query = this.value.trim();
+              if (query) {
+                // Go to first result or products page
+                const firstResult = mobileSearchResultsContent?.querySelector('a');
+                if (firstResult) {
+                  window.location.href = firstResult.href;
+                } else {
+                  const currentLang = window.location.pathname.includes('/en') ? 'en' : 'ar';
+                  window.location.href = `/${currentLang}/products`;
+                }
+              }
+            }
+          });
+        }
         
         // Hide results when clicking outside
         document.addEventListener('click', function(e) {
           const target = e.target as Node;
           if (!searchInput.contains(target) && !searchResults.contains(target)) {
             searchResults?.classList.add('hidden');
+          }
+          if (mobileSearchInput && !mobileSearchInput.contains(target) && !mobileSearchResults?.contains(target)) {
+            mobileSearchResults?.classList.add('hidden');
           }
         });
         
@@ -330,6 +496,14 @@ const { fullWidth = false } = Astro.props;
             searchResults?.classList.remove('hidden');
           }
         });
+
+        if (mobileSearchInput) {
+          mobileSearchInput.addEventListener('focus', function() {
+            if (this.value.trim().length > 1) {
+              mobileSearchResults?.classList.remove('hidden');
+            }
+          });
+        }
       });
     </script>
   </body>
