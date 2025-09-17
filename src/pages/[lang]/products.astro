@@ -12,6 +12,10 @@ export function getStaticPaths() {
 
 const { lang = "ar" } = Astro.params;
 const t = lang === "en" ? en : ar;
+
+// Get search query from URL
+const url = new URL(Astro.request.url);
+const searchQuery = url.searchParams.get('search') || '';
 ---
 
 <Layout title={`${t.menu.products} | ${t.siteName}`} lang={lang}>
@@ -20,6 +24,18 @@ const t = lang === "en" ? en : ar;
     <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center mb-12">
       {t.products.subtitle}
     </p>
+
+    <!-- Search Results -->
+    {searchQuery && (
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+        <h2 class="text-xl font-semibold text-blue-900 mb-2">
+          {lang === "ar" ? `نتائج البحث عن: "${searchQuery}"` : `Search results for: "${searchQuery}"`}
+        </h2>
+        <p class="text-blue-700">
+          {lang === "ar" ? "تم العثور على المنتجات التالية:" : "Found the following products:"}
+        </p>
+      </div>
+    )}
 
     <!-- Products Grid -->
     <div class="grid md:grid-cols-3 gap-10">
@@ -123,4 +139,70 @@ const t = lang === "en" ? en : ar;
       </div>
     </div>
   </section>
+
+  <!-- Search Highlighting Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchQuery = new URLSearchParams(window.location.search).get('search');
+      const currentLang = window.location.pathname.includes('/en') ? 'en' : 'ar';
+      
+      if (searchQuery) {
+        // Highlight matching products
+        const products = document.querySelectorAll('.bg-white.shadow.p-6.rounded-lg');
+        const searchTerm = searchQuery.toLowerCase();
+        
+        products.forEach(product => {
+          const titleElement = product.querySelector('h3');
+          const descriptionElement = product.querySelector('p');
+          
+          if (!titleElement || !descriptionElement) return;
+          
+          const title = titleElement.textContent?.toLowerCase() || '';
+          const description = descriptionElement.textContent?.toLowerCase() || '';
+          
+          // Check if product matches search
+          if (title.includes(searchTerm) || description.includes(searchTerm)) {
+            product.classList.add('ring-2', 'ring-blue-500', 'ring-opacity-50');
+            (product as HTMLElement).style.border = '2px solid #3B82F6';
+            
+            // Add search highlight to title
+            const highlightedTitle = titleElement.textContent?.replace(
+              new RegExp(searchQuery, 'gi'), 
+              `<mark class="bg-yellow-200 px-1 rounded">${searchQuery}</mark>`
+            ) || '';
+            titleElement.innerHTML = highlightedTitle;
+          } else {
+            // Hide non-matching products
+            (product as HTMLElement).style.display = 'none';
+          }
+        });
+        
+        // Show message if no products found
+        const visibleProducts = document.querySelectorAll('.bg-white.shadow.p-6.rounded-lg:not([style*="display: none"])');
+        if (visibleProducts.length === 0) {
+          const grid = document.querySelector('.grid.md\\:grid-cols-3.gap-10');
+          if (grid) {
+            grid.innerHTML = `
+              <div class="col-span-full text-center py-12">
+                <div class="text-gray-500 text-lg mb-4">
+                  <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.709M15 6.291A7.962 7.962 0 0112 5c-2.34 0-4.29 1.009-5.824 2.709"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">
+                  ${currentLang === "ar" ? "لم يتم العثور على منتجات مطابقة" : "No matching products found"}
+                </h3>
+                <p class="text-gray-500 mb-4">
+                  ${currentLang === "ar" ? `لا توجد منتجات تطابق البحث عن "${searchQuery}"` : `No products match the search for "${searchQuery}"`}
+                </p>
+                <a href="/${currentLang}/products" class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800">
+                  ${currentLang === "ar" ? "عرض جميع المنتجات" : "View All Products"}
+                </a>
+              </div>
+            `;
+          }
+        }
+      }
+    });
+  </script>
 </Layout>
