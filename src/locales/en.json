@@ -1,5 +1,5 @@
 {
-    "siteName": "piscina",
+    "siteName": "Mesk",
     "menu": {
       "home": "Home",
       "about": "About Us",
@@ -8,16 +8,16 @@
       "contact": "Contact"
     },
     "footer": {
-      "rights": "All rights reserved © 2025 piscina",
+      "rights": "All rights reserved © 2025 Mesk",
       "followUs": "Follow us on",
       "socialMedia": "Social Media"
     },
     "home": {
-      "title": "piscina Swimming Pools",
+      "title": "Mesk Swimming Pools",
       "subtitle": "Complete swimming pool solutions – design, equipment, and services",
       "cta": "Contact Us",
       "aboutTitle": "About Us",
-      "aboutText": "At piscina, we provide the latest swimming pool solutions from design, installation and maintenance, along with a complete range of high-quality equipment.",
+      "aboutText": "At Mesk, we provide the latest swimming pool solutions from design, installation and maintenance, along with a complete range of high-quality equipment.",
       "readMore": "Read More",
       "productsTitle": "Our Products & Services",
       "filters": "Filters",
@@ -31,7 +31,7 @@
       "contactTitle": "Have a Question?",
       "contactText": "Contact us by phone, WhatsApp, or email.",
       "contactNow": "Contact Us Now",
-      "whyUsTitle": "Why Choose piscina?",
+      "whyUsTitle": "Why Choose Mesk?",
       "whyQuality": "High Quality",
       "whyQualityDesc": "We use the finest materials and international equipment to ensure high and lasting quality.",
       "whyExperience": "Extensive Experience",
@@ -39,7 +39,7 @@
       "whySupport": "Technical Support",
       "whySupportDesc": "Specialized technical support team available 24/7 to serve you.",
       "testimonialsTitle": "What Our Clients Say",
-      "testimonial1": "Excellent service and amazing design for my pool. I recommend piscina to anyone who wants a high-quality pool.",
+      "testimonial1": "Excellent service and amazing design for my pool. I recommend Mesk to anyone who wants a high-quality pool.",
       "client1": "Ahmed Mohamed",
       "testimonial2": "Professional team and continuous follow-up. The pool has been working perfectly for over two years.",
       "client2": "Fatima Al-Saeed",
@@ -89,12 +89,12 @@
     },
     "about": {
       "title": "About Us",
-      "text": "At piscina, we bring years of experience in designing, implementing, and maintaining swimming pools. We are committed to providing the best innovative solutions using the latest equipment and finest materials to ensure a distinctive and safe swimming experience.",
+      "text": "At Mesk, we bring years of experience in designing, implementing, and maintaining swimming pools. We are committed to providing the best innovative solutions using the latest equipment and finest materials to ensure a distinctive and safe swimming experience.",
       "vision": "Our Vision",
       "visionText": "To be pioneers in the swimming pool industry, providing modern and advanced solutions that meet our customers' needs and exceed their expectations.",
       "mission": "Our Mission",
       "missionText": "To provide high-quality products and services while maintaining trust and transparency, building long-term relationships with our customers.",
-      "videoTitle": "About piscina",
+      "videoTitle": "About Mesk",
       "videoText": "We bring years of experience in designing, implementing, and maintaining swimming pools. We are committed to providing the best innovative solutions using the latest equipment and finest materials to ensure a distinctive and safe swimming experience.",
       "point1": "Modern and advanced solutions",
       "point2": "Best international and local brands",
@@ -102,7 +102,7 @@
     },
     "products": {
       "title": "Products & Services",
-      "subtitle": "At piscina, we provide you with a comprehensive range of products and services that ensure a safe and enjoyable swimming experience. All our products are carefully selected from the best international and local brands.",
+      "subtitle": "At Mesk, we provide you with a comprehensive range of products and services that ensure a safe and enjoyable swimming experience. All our products are carefully selected from the best international and local brands.",
       "orderNow": "Order Now",
       "filters": "Filters",
       "filtersDesc": "High-quality filters for purifying water from impurities and suspended materials, ensuring pool water purity year-round.",
